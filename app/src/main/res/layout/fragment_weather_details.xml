@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.weatherapp.views.viewmodel.WeatherViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?backgroundColor">
+
+        <TextView
+            android:id="@+id/weather_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:converterInt="@{viewModel.selectedWeatherData.main.temp}"
+            android:text="@{String.format(@string/temperature,viewModel.selectedWeatherData.main.temp)}"
+            android:textAppearance="?textAppearanceHeadline2"
+            android:textColor="?colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/weather_feel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:text="@{String.format(@string/feels_like_temperature,viewModel.selectedWeatherData.main.feels_like)}"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_temp"
+            tools:text="Feels Like : 78" />
+
+        <TextView
+            android:id="@+id/weather_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:gravity="start"
+            android:text="@{viewModel.selectedWeatherData.weather.get(0).main}"
+            android:textAppearance="?textAppearanceHeadline4"
+            android:textColor="?colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_feel"
+            tools:text="Clouds" />
+
+        <TextView
+            android:id="@+id/weather_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="start"
+            android:text="@{viewModel.selectedWeatherData.weather.get(0).description}"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/weather_main"
+            app:layout_constraintTop_toBottomOf="@id/weather_main"
+            tools:text="Moderate Breeze" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
